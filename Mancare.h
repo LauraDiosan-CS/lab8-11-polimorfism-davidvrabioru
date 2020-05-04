@@ -1,35 +1,40 @@
+
 #pragma once
-#include<ostream>
+#include"Comanda.h"
+#include<string>
+#include<iostream>
 #include <vector>
 using namespace std;
-
-class Mancare {
+#ifndef MANCARE_H
+#define MANCARE_H
+class Mancare : public Comanda {
 private:
-	char* name;
-	string adress;
-	vector<string> list;
-	float price;
-	int cnt = 0;
+	/*char* producer;
+	char* model;
+	int units;*/
+	vector<char*> lista;
 public:
 	Mancare();
-	Mancare(const char* name, string adress,vector<string> list, float price);
-	Mancare(const Mancare& a);
+	Mancare(const char*, const char*, int, vector<char*>);
+	Mancare(const Mancare&);
+	Mancare(string);//conversion
 	~Mancare();
+	Comanda* clone();
+	/*char* getProducer();
+	char* getModel();
+	int getUnits();*/
+	vector<char*> getlista();
+	/*void setProducer(const char*);
+	void setModel(const char*);
+	void setUnits(int);*/
+	void setlista(vector<char*>);
 
-	char* getName();
-	string getAdress();
-	vector<string> getList();
-	float getPrice();
-	
+	Mancare& operator=(const Mancare&);
+	/*bool operator ==(const Mancare&);
+	bool operator<(const Mancare&);*/
 
-	void setName(const char* name);
-	void setPrice(float price);
-	void setAdress(string adress);
-	void setList(string elem, int poz);
+	friend ostream& operator <<(ostream& os, Mancare e);
+	friend istream& operator >> (istream& is, Mancare& e);
 
-
-
-	Mancare& operator=(const Mancare& a);
-	bool operator==(const Mancare& a);
-	friend ostream& operator<<(ostream& os, const Mancare& a);
 };
+#endif
